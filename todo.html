@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO APP</title>
+    <link rel="stylesheet" href="../static/css/todo.css" type="text/css">
+</head>
+<body>
+    <div class="todo">
+        <a href="http://127.0.0.1:8000/">BACK</a>
+        <h1>TO-DO App</h1>
+        <h3>Enter Tasks:</h3>
+        <form action="/addtask/" method="post">{%csrf_token%}
+            <input type="text" name="content"/>
+            <input type="submit" name="add" value="add">
+        </form>
+        <h3>Upcoming tasks:</h3>
+        <ul>
+            {%for todolist in full_list%}
+            <li>
+                {{todolist.tasks}}
+                <form action="/done/{{todolist.id}}/" style="display: inline;"method="post">{%csrf_token%}
+                    <input type="submit" value="done">
+                </form>
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+</body>
+</html>
